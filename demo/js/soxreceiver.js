@@ -81,6 +81,8 @@ window.onload = function () {
             humidALPS = device.transducers[humidityIndex].sensorData.rawValue;
             lightALPS = device.transducers[lightIndex].sensorData.rawValue;
             var timestamp = device.transducers[temperatureIndex].sensorData.timestamp;
+            var hours = calculateHours(timestamp.getHours(), 18);
+            timestamp = timestamp.setHours(hours);
 
             setALPSTemperature(tempALPS);
             setALPSHumidity(humidALPS);
@@ -88,11 +90,11 @@ window.onload = function () {
             setRoomComfortness(tempALPS, humidALPS);
 
             if (initFlagALPS) {
-                setALPSGraph([timestamp.getTime(), tempALPS]);
+                setALPSGraph([timestamp, tempALPS]);
                 initFlagALPS = false;
             }
             else {
-                updateALPSGraph([timestamp.getTime(), tempALPS]);
+                updateALPSGraph([timestamp, tempALPS]);
             }
 
         }
@@ -109,15 +111,17 @@ window.onload = function () {
             tempAkasaka = device.transducers[temperatureIndex].sensorData.rawValue;
             humidAkasaka = device.transducers[humidityIndex].sensorData.rawValue;
             var timestamp = device.transducers[temperatureIndex].sensorData.timestamp;
+            var hours = calculateHours(timestamp.getHours(), 9);
+            timestamp = timestamp.setHours(hours);
 
             setAkasakaTemperature(tempAkasaka);
             setAkasakaHumidity(humidAkasaka);
             if (initFlagAkasaka) {
-                setAkasakaGraph([timestamp.getTime(), tempAkasaka]);
+                setAkasakaGraph([timestamp, tempAkasaka]);
                 initFlagAkasaka = false;
             }
             else {
-                updateAkasakaGraph([timestamp.getTime(), tempAkasaka]);
+                updateAkasakaGraph([timestamp, tempAkasaka]);
             }
         }
         if (device.name == '東京ミッドタウン最新ツイート画像') {
@@ -141,6 +145,13 @@ function  status(message){
 	var html = (new Date().toLocaleString()) + " [main.js] "
         + message + "<hr>\n" + $("#status").html();
 	$("#status").html(html);
+}
+
+function calculateHours(time, diff) {
+    var hour = time + diff;
+    var actualHour = hour % 24;
+
+    return actualHour;
 }
 
 function getTempIndexNumber(hour) {
