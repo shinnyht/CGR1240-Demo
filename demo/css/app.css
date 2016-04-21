@@ -1,0 +1,28 @@
+body{
+    background: no-repeat;
+    background-image: url(../img/midtown.jpg);
+    background-size: cover;
+    background-position: center center;
+}
+#comfortness{
+    font-size: 75px;
+}
+.bold{
+    font-weight: bold;
+}
+.bar{
+    height: 150px;
+}
+.inside{
+    border-right: 2px;
+}
+.outside{
+    border-left: thin dashed #000000;
+}
+.title{
+    margin: 20px 0 25px 0;
+}
+.description{
+    border: thin solid #000000;
+    border-radius: 5px;
+}

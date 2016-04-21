@@ -1,0 +1,143 @@
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tokyo Midtown & Akasaka Dashboard</title>
+    <link rel="stylesheet" href="css/foundation.css">
+    <link rel="stylesheet" href="css/app.css">
+  </head>
+  <body>
+    <div class="row">
+      <div class="large-12 columns middle">
+        <center>
+          <h1 class="title bold">Tokyo Midtown & Akasaka Dashboard</h1>
+        </center>
+      </div>
+    </div>
+    <div class="blank-space"></div>
+
+    <div class="row">
+      <div class="large-12 large-centered columns">
+        <div class="row">
+          <div class="large-6 columns panel inside">
+            <center>
+              <h3 class="bold">東京ミッドタウン27F</h3>
+              <p>(ALPS 環境センサノードからデータを取得)</p>
+            </center>
+            <div class="row">
+              <div class="columns">
+                <div id="alps-temp-graph" style="height:200px"></div>
+              </div>
+            </div>
+            <div class="row bar">
+              <div class="medium-4 columns">
+                <center>
+                <h1><span id="alps-temp"></span>℃</h1>
+                <p>気温</p>
+                </center>
+              </div>
+              <div class="medium-4 columns">
+                <center>
+                <h1><span id="alps-humid"></span>%</h1>
+                <p>湿度</p>
+                </center>
+              </div>
+              <div class="medium-4 columns">
+                <center>
+                <h1><span id="alps-light"></span>[lx]</h1>
+                <p>輝度</p>
+                </center>
+              </div>
+            </div>
+            <div class="row bar">
+              <div class="medium-6 columns">
+                <center>
+                <p class="bold">室内環境: 快適度</p>
+                <div><span id="comfortness"></span></div>
+                <h4 id="comfort-text"></h4>
+                </center>
+              </div>
+              <div class="description medium-4 columns end">
+                <h4 class="bold">快適度に関して</h4>
+                <p>※気温と湿度から算出</br>
+                60 以下     : 寒い</br>
+                60 〜 75    : 快適</br>
+                75 〜 80    : 少し暑い</br>
+                80 以上     : 暑い
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="large-6 columns panel outside">
+            <center>
+              <h3 class="bold">赤坂周辺</h3>
+              <p>(各種Webページからデータを取得)</p>
+            </center>
+            <div class="row">
+              <div class="columns">
+                <div id="akasaka-temp-graph" style="height:200px"></div>
+              </div>
+            </div>
+            <div class="row bar">
+              <div class="medium-4 columns">
+                <center>
+                <h1><span id="akasaka-temp"></span>℃</h1>
+                <p>気温</p>
+                </center>
+              </div>
+              <div class="medium-4 columns">
+                <center>
+                <h1><span id="akasaka-humid"></span>%</h1>
+                <p>湿度</p>
+                </center>
+              </div>
+              <div class="medium-4 columns">
+                <center>
+                </br>
+                <p>出典：一般財団法人日本気象協会(tenki.jp)</p>
+                </center>
+              </div>
+            </div>
+            <div class="row">
+              <center>
+              <p class="bold">東京ミッドタウンに関する最新ツイート画像
+                (出典: Yahoo!検索 - Yahoo! JAPAN)</p>
+              <div class="medium-6 columns">
+                <img class="bar" id="midtown-img" src=""></img>
+              </div>
+              <div class="medium-6 columns">
+                <p class="bold">最新ツイート</p>
+                <p id="tweet"></p>
+              </div>
+              </center>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="lib/vendor/jquery.js"></script>
+    <script src="lib/vendor/what-input.js"></script>
+    <script src="lib/vendor/foundation.js"></script>
+    <script src="lib/jquery.flot.min.js"></script>
+    <script src="lib/jquery.flot.axislabels.js"></script>
+    <script src="lib/jquery.dropotron.min.js"></script>
+    <script src="lib/config.js"></script>
+    <script src="lib/underscore-min.js"></script>
+    <script src="lib/backbone.js"></script>
+    <script src="lib/strophe.js"></script>
+    <script src="lib/sox.strophe.pubsub.js"></script>
+    <script src="lib/strophe.x.js"></script>
+    <script src="lib/jscron.js"></script>
+    <script src="lib/sox/SoxClient.js"></script>
+    <script src="lib/sox/SoxEventListener.js"></script>
+    <script src="lib/sox/Device.js"></script>
+    <script src="lib/sox/Transducer.js"></script>
+    <script src="lib/sox/SensorData.js"></script>
+
+    <script src="js/soxreceiver.js"></script>
+    <script src="js/visualize.js"></script>
+  </body>
+</html>
