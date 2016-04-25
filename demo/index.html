@@ -12,7 +12,11 @@
     <div class="row">
       <div class="large-12 columns middle">
         <center>
-          <h1 class="title bold">Tokyo Midtown & Akasaka Dashboard</h1>
+          <h1 class="title bold">
+            <img style="height: 120px" src="./img/keio.png"></img>
+            Tokyo Midtown & Akasaka Dashboard
+            <img style="height: 60px" src="./img/cisco.png"></img>
+          </h1>
         </center>
       </div>
     </div>
@@ -20,74 +24,25 @@
 
     <div class="row">
       <div class="large-12 large-centered columns">
-        <div class="row">
-          <div class="large-6 columns panel inside">
-            <center>
-              <h3 class="bold">東京ミッドタウン27F</h3>
-              <p>(ALPS 環境センサノードからデータを取得)</p>
-            </center>
-            <div class="row">
-              <div class="columns">
-                <div id="alps-temp-graph" style="height:200px"></div>
-              </div>
-            </div>
-            <div class="row bar">
-              <div class="medium-4 columns">
-                <center>
-                <h1><span id="alps-temp"></span>℃</h1>
-                <p>気温</p>
-                </center>
-              </div>
-              <div class="medium-4 columns">
-                <center>
-                <h1><span id="alps-humid"></span>%</h1>
-                <p>湿度</p>
-                </center>
-              </div>
-              <div class="medium-4 columns">
-                <center>
-                <h1><span id="alps-light"></span>[lx]</h1>
-                <p>輝度</p>
-                </center>
-              </div>
-            </div>
-            <div class="row bar">
-              <div class="medium-6 columns">
-                <center>
-                <p class="bold">室内環境: 快適度</p>
-                <div><span id="comfortness"></span></div>
-                <h4 id="comfort-text"></h4>
-                </center>
-              </div>
-              <div class="description medium-4 columns end">
-                <h4 class="bold">快適度に関して</h4>
-                <p>※気温と湿度から算出</br>
-                60 以下     : 寒い</br>
-                60 〜 75    : 快適</br>
-                75 〜 80    : 少し暑い</br>
-                80 以上     : 暑い
-                </p>
-              </div>
-            </div>
-          </div>
           <div class="large-6 columns panel outside">
             <center>
               <h3 class="bold">赤坂周辺</h3>
               <p>(各種Webページからデータを取得)</p>
             </center>
             <div class="row">
-              <div class="columns">
+              <div class="columns data">
+                <h2></h2>
                 <div id="akasaka-temp-graph" style="height:200px"></div>
               </div>
             </div>
             <div class="row bar">
-              <div class="medium-4 columns">
+              <div class="medium-4 columns data">
                 <center>
                 <h1><span id="akasaka-temp"></span>℃</h1>
                 <p>気温</p>
                 </center>
               </div>
-              <div class="medium-4 columns">
+              <div class="medium-4 columns data">
                 <center>
                 <h1><span id="akasaka-humid"></span>%</h1>
                 <p>湿度</p>
@@ -115,6 +70,57 @@
             </div>
           </div>
         </div>
+        <div class="row">
+          <div class="large-6 columns panel inside">
+            <center>
+              <h3 class="bold">東京ミッドタウン27F</h3>
+              <p>(ALPS 環境センサノードからデータを取得)</p>
+            </center>
+            <div class="row">
+              <div class="columns data">
+                <h2></h2>
+                <div id="alps-temp-graph" style="height:200px"></div>
+              </div>
+            </div>
+            <div class="row bar">
+              <div class="medium-4 columns data">
+                <center>
+                <h1><span id="alps-temp"></span>℃</h1>
+                <p>気温</p>
+                </center>
+              </div>
+              <div class="medium-4 columns data">
+                <center>
+                <h1><span id="alps-humid"></span>%</h1>
+                <p>湿度</p>
+                </center>
+              </div>
+              <div class="medium-4 columns data">
+                <center>
+                <h1><span id="alps-light"></span>[lx]</h1>
+                <p>輝度</p>
+                </center>
+              </div>
+            </div>
+            <div class="row bar">
+              <div class="medium-6 columns data">
+                <center>
+                <p class="bold">室内環境: 快適度</p>
+                <div><span id="comfortness"></span></div>
+                <h4 id="comfort-text"></h4>
+                </center>
+              </div>
+              <div class="description medium-4 columns end">
+                <h4 class="bold">快適度に関して</h4>
+                <p>※気温と湿度から算出</br>
+                60 以下     : 寒い</br>
+                60 〜 75    : 快適</br>
+                75 〜 80    : 少し暑い</br>
+                80 以上     : 暑い
+                </p>
+              </div>
+            </div>
+          </div>
       </div>
     </div>
 
@@ -122,8 +128,10 @@
     <script src="lib/vendor/what-input.js"></script>
     <script src="lib/vendor/foundation.js"></script>
     <script src="lib/jquery.flot.min.js"></script>
+    <script src="lib/jquery.flot.time.js"></script>
     <script src="lib/jquery.flot.axislabels.js"></script>
     <script src="lib/jquery.dropotron.min.js"></script>
+    <script src="lib/date.js"></script>
     <script src="lib/config.js"></script>
     <script src="lib/underscore-min.js"></script>
     <script src="lib/backbone.js"></script>
