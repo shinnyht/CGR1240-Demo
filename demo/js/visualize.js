@@ -3,6 +3,10 @@ var akasakaTempData = [];
 var ALPSPlot;
 var AkasakaPlot;
 
+timezoneJS.timezone.zoneFileBasePath = "tz";
+timezoneJS.timezone.defaultZoneFile = [];
+timezoneJS.timezone.init({async: false});
+
 function setALPSTemperature(temp) {
     var color = "";
 
@@ -16,7 +20,7 @@ function setALPSTemperature(temp) {
         color = "#04B404";
     }
     else if (temp < 25) {
-        color = "#FACC2E";
+        color = "#adff2f";
     }
     else if (temp < 30) {
         color = "#FE642E";
@@ -46,7 +50,7 @@ function setAkasakaTemperature(temp) {
         color = "#04B404";
     }
     else if (temp < 25) {
-        color = "#FACC2E";
+        color = "#daa520";
     }
     else if (temp < 30) {
         color = "#FF4000";
@@ -61,8 +65,8 @@ function setAkasakaHumidity(humid) {
     $("#akasaka-humid").html(humid);
 }
 
-function setALPSGraph(data) {
-    alpsTempData.push(data);
+function setALPSGraph(data1) {
+    alpsTempData.push(data1);
 
     var options = {
         series: { shadowSize: 0 },
@@ -72,21 +76,28 @@ function setALPSGraph(data) {
             tickSize: [1, "minute"],
             show: true,
             mode: "time",
-            timeformat: "%H:%M"
+            timeformat: "%H:%M",
+            timezone: "browser"
         },
         yaxes: [{
-            axisLabel:"℃",
-            position: "left"
+            axisLabel:"℃"
         }],
         lines: { show: true },
         points: { show: true },
         colors: ["#FF4000"]
     };
-    ALPSPlot = $.plot($("#alps-temp-graph"), [alpsTempData], options);
+    ALPSPlot = $.plot(
+        $("#alps-temp-graph"),
+        [{
+            data: alpsTempData
+        }],
+        options
+    );
 }
 
-function updateALPSGraph(data) {
-    alpsTempData.push(data);
+function updateALPSGraph(data1) {
+    alpsTempData.push(data1);
+
     if (alpsTempData.length > 30) {
         alpsTempData.shift();
     }
@@ -95,35 +106,38 @@ function updateALPSGraph(data) {
     ALPSPlot.draw();
 }
 
-function setAkasakaGraph(data) {
-    akasakaTempData.push(data);
+function setAkasakaGraph(data1) {
+    akasakaTempData.push(data1);
 
     var options = {
         series: { shadowSize: 0 },
-        yaxis: {
-            min: 0
-        },
+        yaxis: { min: 0 },
         xaxis: {
             ticks: 10,
-            tickSize: [1, "minute"],
+            tickSize: [2, "minute"],
             show: true,
             mode: "time",
-            timeformat: "%H:%M"
+            timeformat: "%H:%M",
+            timezone: "browser"
         },
-        axisLabels: { show: true },
         yaxes: [{
-            axisLabel:"℃",
-            position: "left"
+            axisLabel:"℃"
         }],
         lines: { show: true },
         points: { show: true },
-        colors: ["#0022FF"]
+        colors: ["#FF4000"]
     };
-    AkasakaPlot = $.plot($("#akasaka-temp-graph"), [akasakaTempData], options);
+    AkasakaPlot = $.plot(
+        $("#akasaka-temp-graph"),
+        [{
+            data: akasakaTempData
+        }],
+        options
+    );
 }
 
-function updateAkasakaGraph(data) {
-    akasakaTempData.push(data);
+function updateAkasakaGraph(data1) {
+    akasakaTempData.push(data1);
     if (akasakaTempData.length > 10) {
         akasakaTempData.shift();
     }
@@ -137,11 +151,11 @@ function setRoomComfortness(temp, humidity) {
     var text = "取得中...";
 
     if (di < 60) {
-        color = "#5882FA";
+        color = "#daa520";
         text = "少し寒い..."
     }
     else if (di < 75) {
-        color = "#FACC2E";
+        color = "#daa520";
         text = "快適!"
     }
     else if (di < 80) {

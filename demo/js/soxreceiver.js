@@ -12,6 +12,7 @@ window.onload = function () {
     var newestTweetText = "";
     var initFlagALPS = true;
     var initFlagAkasaka = true;
+    var lastTimestamp = null;
 
     // SoxServerへ接続
 	var client = new SoxClient(boshService, xmppServer);
@@ -81,8 +82,6 @@ window.onload = function () {
             humidALPS = device.transducers[humidityIndex].sensorData.rawValue;
             lightALPS = device.transducers[lightIndex].sensorData.rawValue;
             var timestamp = device.transducers[temperatureIndex].sensorData.timestamp;
-            var hours = calculateHours(timestamp.getHours(), 18);
-            timestamp = timestamp.setHours(hours);
 
             setALPSTemperature(tempALPS);
             setALPSHumidity(humidALPS);
@@ -103,7 +102,6 @@ window.onload = function () {
             var humidityIndex;
             var currentTime = new Date();
             currentHour = currentTime.getHours();
-            var timezone = currentTime.getTimezoneOffset();
 
             temperatureIndex = getTempIndexNumber(currentHour);
             humidityIndex = getHumidIndexNumber(currentHour);
@@ -111,17 +109,15 @@ window.onload = function () {
             tempAkasaka = device.transducers[temperatureIndex].sensorData.rawValue;
             humidAkasaka = device.transducers[humidityIndex].sensorData.rawValue;
             var timestamp = device.transducers[temperatureIndex].sensorData.timestamp;
-            var hours = calculateHours(timestamp.getHours(), 9);
-            timestamp = timestamp.setHours(hours);
 
             setAkasakaTemperature(tempAkasaka);
             setAkasakaHumidity(humidAkasaka);
             if (initFlagAkasaka) {
-                setAkasakaGraph([timestamp, tempAkasaka]);
+                setAkasakaGraph([timestamp, tempAkasaka], [timestamp, humidAkasaka]);
                 initFlagAkasaka = false;
             }
             else {
-                updateAkasakaGraph([timestamp, tempAkasaka]);
+                updateAkasakaGraph([timestamp, tempAkasaka], [timestamp, humidAkasaka]);
             }
         }
         if (device.name == '東京ミッドタウン最新ツイート画像') {
@@ -145,13 +141,6 @@ function  status(message){
 	var html = (new Date().toLocaleString()) + " [main.js] "
         + message + "<hr>\n" + $("#status").html();
 	$("#status").html(html);
-}
-
-function calculateHours(time, diff) {
-    var hour = time + diff;
-    var actualHour = hour % 24;
-
-    return actualHour;
 }
 
 function getTempIndexNumber(hour) {
