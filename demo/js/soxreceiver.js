@@ -24,6 +24,7 @@ window.onload = function () {
 		
         var deviceNames = [
             'CGR1240-ALPS-Sensor',
+            'CGR1240-Processed-Sensor',
             '東京都港区ピンポイント天気(3時間)',
             '東京ミッドタウン最新ツイート画像'
         ];
@@ -96,6 +97,12 @@ window.onload = function () {
                 updateALPSGraph([timestamp, tempALPS]);
             }
 
+        }
+        if (device.name == 'CGR1240-Processed-Sensor') {
+            var discomfortnessIndex = 1;
+
+            discomfortness = device.transducers[discomfortnessIndex].sensorData.rawValue;
+            setRoomComfortness(discomfortnessIndex);
         }
         if (device.name == '東京都港区ピンポイント天気(3時間)') {
             var temperatureIndex;

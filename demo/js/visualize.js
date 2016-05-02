@@ -146,8 +146,7 @@ function updateAkasakaGraph(data1) {
     AkasakaPlot.draw();
 }
 
-function setRoomComfortness(temp, humidity) {
-    var di = calculateRoomComfortness(temp, humidity);
+function setRoomComfortness(di) {
     var text = "取得中...";
 
     if (di < 60) {
@@ -178,31 +177,6 @@ function setNewestTweetImage(img) {
 
 function setNewestTweetText(text) {
     $("#tweet").html(text);
-}
-
-function calculateRoomComfortness(temp, humidity) {
-    var discomfortIndex = 0.81 * temp + 0.01 * humidity * (0.99 * temp - 14.3) + 46.3;
-    discomfortIndex = floatFormat(discomfortIndex, 2);
-
-    /*
-     * Discomfort Index Indication
-     * DI < 60      : cold
-     * 60 < DI < 75 : comfort
-     * 75 < DI < 80 : bit hot
-     * 80 < DI      : hot
-    switch (discomfortIndex) {
-        case discomfortIndex < 60:
-            break;
-        case 60 <= discomfortIndex && discomfortIndex < 75:
-            break;
-        case 75 <= discomfortIndex && discomfortIndex < 80:
-            break;
-        case discomfortIndex < 80:
-            break;
-    }
-    */
-
-    return discomfortIndex;
 }
 
 function floatFormat( number, n ) {
