@@ -3,7 +3,7 @@ var akasakaTempData = [];
 var ALPSPlot;
 var AkasakaPlot;
 
-timezoneJS.timezone.zoneFileBasePath = "tz";
+timezoneJS.timezone.zoneFileBasePath = "lib/tz";
 timezoneJS.timezone.defaultZoneFile = [];
 timezoneJS.timezone.init({async: false});
 
